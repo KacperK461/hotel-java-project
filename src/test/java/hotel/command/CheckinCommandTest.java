@@ -44,7 +44,7 @@ public class CheckinCommandTest {
         LocalDate checkout = checkin.plusDays(2);
 
         String input = String.join("\n",
-                "101"
+                "101",
                 "John Doe",
                 "n",
                 checkin.toString(),
