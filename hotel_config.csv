@@ -1,0 +1,7 @@
+# Hotel configuration file
+# Format: room_number,description,price,capacity,guest_names(semicolon separated),checkin_date,checkout_date
+101,Standard room,120.00,2,aa aa,2025-11-15,2025-11-23
+102,Apartment,350.00,4,,,
+103,Single room,80.00,1,,,
+104,Deluxe room,200.00,2,John Doe;Jane Smith,2025-01-13,2025-01-20
+105,Suite,450.00,4,,,
