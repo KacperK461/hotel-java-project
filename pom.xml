@@ -62,19 +62,32 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.14</version>
                 <executions>
+                    <!-- Prepare the JaCoCo agent before tests run -->
                     <execution>
+                        <id>prepare-agent</id>
+                        <phase>initialize</phase>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
+
+                    <!-- Generate the coverage report (including XML) after tests -->
                     <execution>
                         <id>report</id>
-                        <phase>test</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <!-- Ensure the XML report is produced where Sonar expects it by default -->
+                    <outputDirectory>${project.build.directory}/site/jacoco</outputDirectory>
+                    <formats>
+                        <format>XML</format>
+                        <format>HTML</format>
+                    </formats>
+                </configuration>
             </plugin>
 
             <!-- SonarQube Maven plugin (local only) -->
