@@ -96,7 +96,7 @@ class HotelServiceTest {
 
         double cost = hotelService.checkout(101, LocalDate.of(2025, 11, 17));
 
-        assertEquals(240.0, cost, 0.01); // 2 days * 120.0
+        assertEquals(240.0, cost, 0.01);
         assertTrue(hotelService.getRoom(101).isFree());
     }
 
@@ -117,7 +117,7 @@ class HotelServiceTest {
         hotelService.checkin(101, guests, checkin, checkout);
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            hotelService.checkout(101, LocalDate.of(2025, 11, 10)); // Before checkin
+            hotelService.checkout(101, LocalDate.of(2025, 11, 10));
         });
 
         assertEquals("Checkout date cannot be before check-in date!", exception.getMessage());
@@ -130,9 +130,8 @@ class HotelServiceTest {
 
         hotelService.checkin(101, guests, checkin, checkout);
 
-        double cost = hotelService.checkout(101, checkin); // Same day checkout
-
-        assertEquals(120.0, cost, 0.01); // Minimum 1 day
+        double cost = hotelService.checkout(101, checkin);
+        assertEquals(120.0, cost, 0.01);
         assertTrue(hotelService.getRoom(101).isFree());
     }
 
@@ -142,18 +141,15 @@ class HotelServiceTest {
         LocalDate checkout = LocalDate.of(2025, 11, 20);
         LocalDate actualCheckout = LocalDate.of(2025, 11, 17);
 
-        // Initial state
         assertTrue(hotelService.getRoom(101).isFree());
         assertTrue(hotelService.getRoom(102).isFree());
 
-        // Checkin
         hotelService.checkin(101, guests, checkin, checkout);
         assertFalse(hotelService.getRoom(101).isFree());
         assertTrue(hotelService.getRoom(102).isFree());
 
-        // Checkout
         double cost = hotelService.checkout(101, actualCheckout);
-        assertEquals(240.0, cost, 0.01); // 2 days * 120.0
+        assertEquals(240.0, cost, 0.01);
         assertTrue(hotelService.getRoom(101).isFree());
         assertTrue(hotelService.getRoom(102).isFree());
     }
@@ -169,22 +165,19 @@ class HotelServiceTest {
         fourGuests.add(new Guest("Guest", "3"));
         fourGuests.add(new Guest("Guest", "4"));
 
-        // Checkin to both rooms
         hotelService.checkin(101, guests, checkin, checkout);
         hotelService.checkin(102, fourGuests, checkin, checkout);
 
         assertFalse(hotelService.getRoom(101).isFree());
         assertFalse(hotelService.getRoom(102).isFree());
 
-        // Checkout room 101
         double cost101 = hotelService.checkout(101, LocalDate.of(2025, 11, 17));
-        assertEquals(240.0, cost101, 0.01); // 2 days * 120.0
+        assertEquals(240.0, cost101, 0.01);
         assertTrue(hotelService.getRoom(101).isFree());
         assertFalse(hotelService.getRoom(102).isFree());
 
-        // Checkout room 102
         double cost102 = hotelService.checkout(102, LocalDate.of(2025, 11, 18));
-        assertEquals(600.0, cost102, 0.01); // 3 days * 200.0
+        assertEquals(600.0, cost102, 0.01);
         assertTrue(hotelService.getRoom(101).isFree());
         assertTrue(hotelService.getRoom(102).isFree());
     }

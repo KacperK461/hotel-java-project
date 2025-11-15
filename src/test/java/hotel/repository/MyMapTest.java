@@ -130,18 +130,13 @@ class MyMapTest {
 
     @Test
     void testComplexWorkflow() {
-        // Add items
         map.put(1, "first");
         map.put(2, "second");
         map.put(3, "third");
 
-        // Update item
         map.put(2, "updated_second");
-
-        // Remove item
         map.remove(3);
 
-        // Verify final state
         assertEquals("first", map.get(1));
         assertEquals("updated_second", map.get(2));
         assertNull(map.get(3));
@@ -165,8 +160,6 @@ class MyMapTest {
         map.put(1, "first");
         map.put(2, "second");
         map.put(3, "third");
-
-        // Update middle item
         map.put(2, "updated_second");
 
         List<Integer> keys = map.keys();

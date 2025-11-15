@@ -82,7 +82,6 @@ class CommandRegistryTest {
         Command retrieved = registry.get("test");
         assertNotNull(retrieved);
 
-        // Test that the command can be executed without errors
         assertDoesNotThrow(() -> retrieved.execute());
     }
 }

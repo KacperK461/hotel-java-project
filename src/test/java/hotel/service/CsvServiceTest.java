@@ -41,11 +41,9 @@ class CsvServiceTest {
 
     @Test
     void testBasicFunctionality() {
-        // Test basic service creation and null checks
         MyMap<Integer, Room> rooms = new MyMap<>();
         rooms.put(101, new Room(101, "Test room", 2, 100.0));
 
-        // This should not throw an exception
         assertDoesNotThrow(() -> {
             assertTrue(rooms.keys().size() > 0);
         });
