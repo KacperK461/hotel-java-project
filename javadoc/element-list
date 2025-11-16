@@ -1,0 +1,5 @@
+hotel.app
+hotel.command
+hotel.model
+hotel.repository
+hotel.service
