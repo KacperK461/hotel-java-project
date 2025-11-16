@@ -98,7 +98,8 @@ class HotelServiceTest {
 
     @Test
     void testCheckoutRoomNotFound() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> hotelService.checkout(999, LocalDate.of(2025, 11, 20)));
+        LocalDate checkoutDate = LocalDate.of(2025, 11, 20);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> hotelService.checkout(999, checkoutDate));
 
         assertEquals("Room not found", exception.getMessage());
     }
@@ -110,7 +111,8 @@ class HotelServiceTest {
 
         hotelService.checkin(101, guests, checkin, checkout);
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> hotelService.checkout(101, LocalDate.of(2025, 11, 10)));
+        LocalDate invalidCheckoutDate = LocalDate.of(2025, 11, 10);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> hotelService.checkout(101, invalidCheckoutDate));
 
         assertEquals("Checkout date cannot be before check-in date!", exception.getMessage());
     }
