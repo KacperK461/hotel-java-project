@@ -63,9 +63,7 @@ class HotelServiceTest {
         LocalDate checkin = LocalDate.of(2025, 11, 15);
         LocalDate checkout = LocalDate.of(2025, 11, 20);
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            hotelService.checkin(999, guests, checkin, checkout);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> hotelService.checkin(999, guests, checkin, checkout));
 
         assertEquals("Room not found", exception.getMessage());
     }
@@ -80,9 +78,7 @@ class HotelServiceTest {
             tooManyGuests.add(new Guest("Guest" + i, "Test"));
         }
 
-        Exception exception = assertThrows(IllegalStateException.class, () -> {
-            hotelService.checkin(101, tooManyGuests, checkin, checkout);
-        });
+        Exception exception = assertThrows(IllegalStateException.class, () -> hotelService.checkin(101, tooManyGuests, checkin, checkout));
 
         assertEquals("Too many guests for this room", exception.getMessage());
     }
@@ -102,9 +98,7 @@ class HotelServiceTest {
 
     @Test
     void testCheckoutRoomNotFound() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            hotelService.checkout(999, LocalDate.of(2025, 11, 20));
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> hotelService.checkout(999, LocalDate.of(2025, 11, 20)));
 
         assertEquals("Room not found", exception.getMessage());
     }
@@ -116,9 +110,7 @@ class HotelServiceTest {
 
         hotelService.checkin(101, guests, checkin, checkout);
 
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            hotelService.checkout(101, LocalDate.of(2025, 11, 10));
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> hotelService.checkout(101, LocalDate.of(2025, 11, 10)));
 
         assertEquals("Checkout date cannot be before check-in date!", exception.getMessage());
     }

@@ -11,14 +11,13 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.PrintStream;
 import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CheckoutCommandTest {
+class CheckoutCommandTest {
 
     private final PrintStream originalOut = System.out;
     private final java.io.InputStream originalIn = System.in;

@@ -81,28 +81,28 @@ class RoomTest {
 
     @Test
     void testToString() {
-        String expected = "#101 (Standard room) — 120.5 PLN, max 2 guests";
+        String expected = "#101 (Standard room) - 120.5 PLN, max 2 guests";
         assertEquals(expected, room.toString());
     }
 
     @Test
     void testToStringWithDifferentValues() {
         Room testRoom = new Room(205, "Deluxe Suite", 4, 350.75);
-        String expected = "#205 (Deluxe Suite) — 350.75 PLN, max 4 guests";
+        String expected = "#205 (Deluxe Suite) - 350.75 PLN, max 4 guests";
         assertEquals(expected, testRoom.toString());
     }
 
     @Test
     void testToStringWithZeroPrice() {
         Room freeRoom = new Room(999, "Free room", 1, 0.0);
-        String expected = "#999 (Free room) — 0.0 PLN, max 1 guests";
+        String expected = "#999 (Free room) - 0.0 PLN, max 1 guests";
         assertEquals(expected, freeRoom.toString());
     }
 
     @Test
     void testToStringWithSpecialCharacters() {
         Room specialRoom = new Room(303, "Luxury & Premium Suite", 3, 299.99);
-        String expected = "#303 (Luxury & Premium Suite) — 299.99 PLN, max 3 guests";
+        String expected = "#303 (Luxury & Premium Suite) - 299.99 PLN, max 3 guests";
         assertEquals(expected, specialRoom.toString());
     }
 

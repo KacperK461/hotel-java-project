@@ -17,7 +17,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ViewCommandTest {
+class ViewCommandTest {
 
     private final PrintStream originalOut = System.out;
     private final java.io.InputStream originalIn = System.in;

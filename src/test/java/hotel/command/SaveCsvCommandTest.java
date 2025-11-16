@@ -14,33 +14,34 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SaveCsvCommandTest {
+class SaveCsvCommandTest {
 
     private final PrintStream originalOut = System.out;
     private ByteArrayOutputStream out;
-    private final File csvFile = new File("hotel_config.csv");
+    private File csvFile;
 
     @BeforeEach
     void setUp() {
         out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
+        csvFile = new File(System.getProperty("java.io.tmpdir"), "hotel_test_" + System.nanoTime() + ".csv");
         if (csvFile.exists()) csvFile.delete();
     }
 
     @AfterEach
     void tearDown() {
         System.setOut(originalOut);
-        if (csvFile.exists()) csvFile.delete();
+        if (csvFile != null && csvFile.exists()) csvFile.delete();
     }
 
     @Test
-    void saveCsv_createsFileWithContents() throws Exception {
+    void saveCsv_createsFileWithContents() {
         MyMap<Integer, Room> map = new MyMap<>();
         map.put(1, new Room(1, "Room A", 1, 10.0));
         HotelService service = new HotelService(map);
         CsvService csvService = new CsvService();
 
-        SaveCsvCommand cmd = new SaveCsvCommand(service, csvService);
+    SaveCsvCommand cmd = new SaveCsvCommand(service, csvService, csvFile.getPath());
         cmd.execute();
 
         assertTrue(csvFile.exists());

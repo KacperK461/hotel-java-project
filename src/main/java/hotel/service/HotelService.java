@@ -74,7 +74,7 @@ public class HotelService {
     public void printAllRooms() {
         for (Integer key : rooms.keys()) {
             Room r = rooms.get(key);
-            System.out.println(r + (r.isFree() ? " — FREE" : " — OCCUPIED"));
+            System.out.println(r + (r.isFree() ? " - FREE" : " - OCCUPIED"));
         }
     }
 }

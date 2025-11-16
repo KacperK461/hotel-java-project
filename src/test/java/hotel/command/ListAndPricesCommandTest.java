@@ -12,7 +12,7 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ListAndPricesCommandTest {
+class ListAndPricesCommandTest {
 
     private final PrintStream originalOut = System.out;
     private ByteArrayOutputStream out;

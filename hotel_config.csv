@@ -1,0 +1,7 @@
+# Hotel configuration file
+# Format: room_number,description,price,capacity,guest_names(semicolon separated),checkin_date,checkout_date
+101,Standard Room,120.50,2,,,
+102,Deluxe Suite,350.75,4,,,
+103,Luxury Premium Suite,299.99,3,,,
+201,Economy Room,89.99,2,,,
+202,Family Suite,450.00,6,,,

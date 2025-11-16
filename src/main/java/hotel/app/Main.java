@@ -13,7 +13,7 @@ public class Main {
         MyMap<Integer, Room> rooms = new MyMap<>();
         CsvService csvService = new CsvService();
 
-        String csvFilePath = "hotel_config.csv";
+    String csvFilePath = args.length > 0 ? args[0] : "hotel_config.csv";
         try {
             System.out.println("Loading hotel configuration from: " + csvFilePath);
             rooms = csvService.loadFromCsv(csvFilePath);
@@ -41,26 +41,23 @@ public class Main {
         System.out.println("Hotel Management System - Enter a command:");
         System.out.println("Available commands: prices, view, checkin, checkout, list, save, exit");
 
-        while (true) {
+        boolean running = true;
+        while (running) {
             try {
                 System.out.print("> ");
                 String cmd = sc.nextLine().trim().toLowerCase();
-
                 if (cmd.equals("exit")) {
                     System.out.println("Shutting down the system...");
-                    break;
-                }
-
-                if (cmd.isEmpty()) {
+                    running = false;
+                } else if (cmd.isEmpty()) {
                     System.out.println("Please enter a command. Available commands: prices, view, checkin, checkout, list, save, exit");
-                    continue;
-                }
-
-                Command command = registry.get(cmd);
-                if (command == null) {
-                    System.out.println("Unknown command: '" + cmd + "'. Available commands: prices, view, checkin, checkout, list, save, exit");
                 } else {
-                    command.execute();
+                    Command command = registry.get(cmd);
+                    if (command == null) {
+                        System.out.println("Unknown command: '" + cmd + "'. Available commands: prices, view, checkin, checkout, list, save, exit");
+                    } else {
+                        command.execute();
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("An unexpected error occurred: " + e.getMessage());

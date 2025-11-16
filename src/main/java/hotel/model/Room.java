@@ -45,7 +45,7 @@ public class Room {
 
     @Override
     public String toString() {
-        return "#" + number + " (" + description + ") — " +
+        return "#" + number + " (" + description + ") - " +
                 pricePerNight + " PLN, max " + capacity + " guests";
     }
 }

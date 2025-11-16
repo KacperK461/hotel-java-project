@@ -65,16 +65,7 @@ public class CsvService {
                 String checkoutDateStr = parts[6].trim();
 
                 if (!guestNames.isEmpty() && !checkinDateStr.isEmpty() && !checkoutDateStr.isEmpty()) {
-                    try {
-                        List<Guest> guests = parseGuests(guestNames);
-                        LocalDate checkinDate = LocalDate.parse(checkinDateStr, DATE_FORMATTER);
-                        LocalDate checkoutDate = LocalDate.parse(checkoutDateStr, DATE_FORMATTER);
-
-                        room.setBooking(new Booking(guests, checkinDate, checkoutDate));
-                    } catch (Exception e) {
-                        System.err.println("Warning: Could not parse booking information for room " + roomNumber + ": " + e.getMessage());
-                        System.err.println("  Guests: '" + guestNames + "', Check-in: '" + checkinDateStr + "', Check-out: '" + checkoutDateStr + "'");
-                    }
+                    parseAndAttachBookingSafely(room, roomNumber, guestNames, checkinDateStr, checkoutDateStr);
                 }
             }
 
@@ -102,6 +93,19 @@ public class CsvService {
         }
 
         return guests;
+    }
+
+    private void parseAndAttachBookingSafely(Room room, int roomNumber, String guestNames, String checkinDateStr, String checkoutDateStr) {
+        try {
+            List<Guest> guests = parseGuests(guestNames);
+            LocalDate checkinDate = LocalDate.parse(checkinDateStr, DATE_FORMATTER);
+            LocalDate checkoutDate = LocalDate.parse(checkoutDateStr, DATE_FORMATTER);
+
+            room.setBooking(new Booking(guests, checkinDate, checkoutDate));
+        } catch (Exception e) {
+            System.err.println("Warning: Could not parse booking information for room " + roomNumber + ": " + e.getMessage());
+            System.err.println("  Guests: '" + guestNames + "', Check-in: '" + checkinDateStr + "', Check-out: '" + checkoutDateStr + "'");
+        }
     }
 
     public void saveToCsv(MyMap<Integer, Room> rooms, String filePath) throws IOException {

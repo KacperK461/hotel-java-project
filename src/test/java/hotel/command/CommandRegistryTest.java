@@ -82,7 +82,7 @@ class CommandRegistryTest {
         Command retrieved = registry.get("test");
         assertNotNull(retrieved);
 
-        assertDoesNotThrow(() -> retrieved.execute());
+        assertDoesNotThrow(retrieved::execute);
     }
 }
 

@@ -1,6 +1,5 @@
 package hotel.command;
 
-import hotel.model.Guest;
 import hotel.model.Room;
 import hotel.repository.MyMap;
 import hotel.service.HotelService;
@@ -15,7 +14,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CheckinCommandTest {
+class CheckinCommandTest {
 
     private final PrintStream originalOut = System.out;
     private final java.io.InputStream originalIn = System.in;

@@ -26,13 +26,12 @@ public class ViewCommand implements Command {
                 return;
             }
 
-            int num;
-            try {
-                num = Integer.parseInt(roomInput);
-            } catch (NumberFormatException e) {
+            Integer numObj = tryParseRoomNumber(roomInput);
+            if (numObj == null) {
                 System.out.println("Error: Invalid room number format. Please enter a valid number.");
                 return;
             }
+            int num = numObj;
 
             Room room = service.getRoom(num);
             if (room == null) {
@@ -54,6 +53,14 @@ public class ViewCommand implements Command {
             System.out.println("Error: Invalid number format.");
         } catch (Exception e) {
             System.out.println("Unexpected error occurred: " + e.getMessage());
+        }
+    }
+
+    private Integer tryParseRoomNumber(String roomInput) {
+        try {
+            return Integer.parseInt(roomInput);
+        } catch (NumberFormatException e) {
+            return null;
         }
     }
 }

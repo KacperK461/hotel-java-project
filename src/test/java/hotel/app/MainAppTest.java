@@ -11,17 +11,18 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MainAppTest {
+class MainAppTest {
 
     private final PrintStream originalOut = System.out;
     private final java.io.InputStream originalIn = System.in;
     private ByteArrayOutputStream out;
-    private final File csv = new File("hotel_config.csv");
+    private File csv;
 
     @BeforeEach
     void setUp() {
         out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
+        csv = new File(System.getProperty("java.io.tmpdir"), "hotel_main_test_" + System.nanoTime() + ".csv");
         if (csv.exists()) csv.delete();
     }
 
@@ -29,7 +30,7 @@ public class MainAppTest {
     void tearDown() {
         System.setOut(originalOut);
         System.setIn(originalIn);
-        if (csv.exists()) csv.delete();
+        if (csv != null && csv.exists()) csv.delete();
     }
 
     @Test
@@ -37,7 +38,8 @@ public class MainAppTest {
         String input = "exit\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        Main.main(new String[]{});
+        String nonExistentPath = System.getProperty("java.io.tmpdir") + "nonexistent_" + System.nanoTime() + ".csv";
+        Main.main(new String[]{nonExistentPath});
 
         String printed = out.toString();
         assertTrue(printed.contains("Using default hardcoded configuration."));
@@ -53,7 +55,7 @@ public class MainAppTest {
         String input = "exit\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        Main.main(new String[]{});
+    Main.main(new String[]{csv.getPath()});
 
         String printed = out.toString();
         assertTrue(printed.contains("Successfully loaded") || printed.contains("Loading hotel configuration"));
